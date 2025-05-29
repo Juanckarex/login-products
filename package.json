@@ -2,8 +2,11 @@
   "name": "clase_8",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://Juanckarex.github.io/login-products",
   "type": "module",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -19,6 +22,7 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
+    "gh-pages": "^6.3.0",
     "vite": "^4.1.0"
   }
 }

@@ -20,8 +20,8 @@
 }
 
 .card_1{
-  width: 90%;
-  max-width: 300px;
+  width: auto;
+  max-width: 100%;
   margin: 0 auto;
   height: 320px;
   background-color: #fff;
@@ -31,37 +31,30 @@
   border-radius: 5px;
   border: 2px solid var(--main-color);
   box-shadow: 4px 4px var(--main-color);
+  
 }
 
 .swiper {
-  width: 95%;
+  width: 100%;
   height: auto;
   padding: 20px 0;
   box-sizing: border-box;
   margin-left: 0 !important;
 }
-
+.swiper-container {
+  width: 100%;
+  max-width: 100%;
+}
 .swiper-wrapper {
   margin-left: 0 !important;
 }
 
-/* Make Swiper adapt to smaller screens */
-@media screen and (max-width: 1024px) {
-  .swiper {
-    padding: 10px;
-  }
-
+.swiper-slide {
+  width: auto;
 }
-
-
-
-@media screen and (max-width: 480px) {
-  
-  .card_1 {
-    max-width: 90%;
-  }
+.swiper-pagination {
+  bottom: -10px !important; /* Move it below the Swiper */
 }
-
 .card:last-child {
   justify-content: flex-end;
 }
