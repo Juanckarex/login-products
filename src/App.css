@@ -42,7 +42,7 @@
 }
 
 .Main_container{
-  margin: auto;
-  width: 325px;
+  margin: 0;
+  width: auto;
   height: 40px;
 }

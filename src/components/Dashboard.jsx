@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar.jsx";
 import "./Dashboard.css";
 import getProducto from "../api/getProductos.js";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 function Dashboard() {
   const [title, setTitle] = useState("");
@@ -9,6 +14,7 @@ function Dashboard() {
   const [price, setPrice] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [stock, setstock] = useState("");
+  const [products, setProducts] = useState([]);
 
   const getData = async () => {
     const productResponse = await getProducto();
@@ -33,48 +39,57 @@ function Dashboard() {
     getData();
   }, []);
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productsData = await getProducto();
+      setProducts(productsData);
+    };
+    fetchProducts();
+  }, []);
+
   return (
    
 
     <div class="card">
       <Navbar /> 
       
-      <div class="card-title">{title}</div>
-      <div class="card-img"><div class="img"><img src="https://cdn.dummyjson.com/products/images/groceries/Green%20Chili%20Pepper/1.png" alt="Green Chili Pepper" /></div></div>
+
+      <Swiper
+        modules={[Navigation, Pagination]}
+        spaceBetween={20}
+        slidesPerView={3}
+        navigation
+        pagination={{ clickable: true }}
+      >
+        {products.map((product) => (
+          <SwiperSlide key={product.id}>
+            <div class="card_1">
+              <div class="card-title">{product.title}</div>
+              <div class="card-img">
+                <div class="img">
+                  <img src={product.thumbnail || "https://cdn.dummyjson.com/products/images/groceries/Green%20Chili%20Pepper/1.png"} alt={product.title} />
+                </div>
+              </div>
+              <div class="card-subtitle">Category: {product.category}</div>
+              <div class="card-subtitle"><p>{product.description}</p></div>
+              <hr class="card-divider" />
+              <div class="card-footer">
+                <div class="card-price"><span>$</span> {product.price}</div>
+                <div class="card-stock"><span>In stock:</span> {product.stock} units</div>
+                <button class="card-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z"></path>
+                    <path d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z"></path>
+                    <path d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z"></path>
+                    <path d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
       
-      <div class="card-subtitle">Category: {category}</div>
-      <div class="card-subtitle"><p>Green chili peppers are known for their greenish, earthy flavor and are acidic, sharp, and pungent.
-              They can range from being somewhat spicy to having a substantial amount of heat. {descripcion}</p></div>
-      <hr class="card-divider"/>
-      <div class="card-footer">
-          <div class="card-price"><span>$</span> {price}</div>
-    <div class="card-stock"><span>In stock:</span> {stock} units</div>
-
-          <button class="card-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z"></path><path d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z"></path><path d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z"></path><path d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z"></path></svg>
-          </button>
-      </div>
-
-
-      {/* <div className="container-text">
-        <h1>{title}</h1>
-        <h3>Category: {category}</h3>
-      </div>
-      <div className="container-product">
-        <div className="card">
-          <img src="https://cdn.dummyjson.com/products/images/groceries/Green%20Chili%20Pepper/1.png" />
-        </div>
-        <div className="info">
-          <h2>Price: {price}$</h2>
-          <h3>Stock: {stock} units</h3>
-          <p>Green chili peppers are known for their greenish, earthy flavor and are acidic, sharp, and pungent.
-            They can range from being somewhat spicy to having a substantial amount of heat1. The heat in a chili 
-            pepper comes from a compound called capsaicin, and the amount of capsaicin in a chili pepper determines
-            its heat. {descripcion}</p>
-          <button className="btn"> Buy </button>
-        </div>
-      </div> */}
-
       {/* Redes Sociales  */}
       <div class="social-media">
         <a href="https://www.facebook.com/profile.php?id=100090116710579">
@@ -96,6 +111,8 @@ function Dashboard() {
           <span class="tooltip-social">Facebook</span>
         </a>
       </div>
+
+
     </div>
   );
 }

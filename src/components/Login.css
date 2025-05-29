@@ -1,5 +1,13 @@
  /* Tomado y modificado de https://uiverse.io/ */
 
+ .form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px; /* for small screens */
+  box-sizing: border-box;
+}
 .form {
   --input-focus: #2d8cf0;
   --font-color: #323232;
@@ -16,6 +24,7 @@
   border-radius: 5px;
   border: 2px solid var(--main-color);
   box-shadow: 4px 4px var(--main-color);
+ 
 }
 
 .title {

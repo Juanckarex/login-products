@@ -1,12 +1,11 @@
 import axios from './axios.js';
 
-export default async function getProducto() {
+export default async function getProductos() {
     try {
       const response = await axios.get("/products");
-      // console.log(response.data.products[25]);
-      return response.data.products[25]; 
+      return response.data.products; // Return all products
     } catch (err) {
       console.error(err);
-      return null; 
+      return []; // Return empty array on error
     }
   }

@@ -31,7 +31,7 @@ function Login({auth}) {
         const dataResponse = await login(userName,password);
         const resStatus = dataResponse.status;
         const resInfo = dataResponse.data; 
-        // console.log(dataResponse);
+        console.log(dataResponse);
 
         if (resStatus === 200){
             auth(true)
@@ -42,7 +42,7 @@ function Login({auth}) {
     }
 
     return (
-        <div>
+        <div className="form-container">
             <form className="form" onSubmit={handLogin}>
                 <div  className="title">Welcome,<br/><span>sign up to continue</span></div>
                 {/*<label class="input" htmlFor='username'>Username:</label>
