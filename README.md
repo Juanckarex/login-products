@@ -70,3 +70,16 @@ The project expects a backend API with these endpoints:
 - Implement product search/filter
 - Add shopping cart functionality
 - Improve mobile responsiveness
+  
+## Deploying to GitHub Pages with Vite
+https://github.com/gitname/react-gh-pages
+
+change gh-pages -d build to "deploy": "gh-pages -d dist",
+and add
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  base: '/login-products/', // Replace with your repo name
+})
